@@ -3,18 +3,35 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
-// function Message(props) {
-//   props.text = "Hello World";
-//   return <h1>{props.text}</h1>;
-// }
-// function
-class Message extends React.Component {
+class NameUpdate extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: "Hello World" };
+    this.state = {
+      count: 0,
+      name: "Name"
+    };
   }
+  handleInput = e => {
+    e.preventDefault();
+    this.setState({ name: e.target.value });
+    // console.log(e.target.value);
+  };
+  handleButtonClick = e => {
+    e.preventDefault();
+    this.setState({ count: this.state.count + 1 });
+  };
+
   render() {
-    return <div>{this.state.text}</div>;
+    return (
+      <div>
+        <div>{this.state.name}: </div>
+        <div>{this.state.count}# of Updates: </div>
+        <br />
+        <input onChange={this.handleInput} />
+        <br />
+        <input type="submit" value="Submit" onClick={this.handleButtonClick} />
+      </div>
+    );
   }
 }
 
@@ -22,7 +39,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Message />
+        <NameUpdate />
       </React.Fragment>
     );
   }
